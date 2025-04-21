@@ -8,6 +8,7 @@ import TakePhotoPage from './components/TakePhotoPage';
 import WarningDialog from './components/WarningDialog';
 import ResultPage from './components/ResultPage';
 import WarningPage from './components/WarningPage';
+import LoadingPage from "./components/LoadingPage";
 
 import './index.css';
 const App: React.FC = () => {
@@ -152,6 +153,7 @@ const App: React.FC = () => {
           <Route path="/warning" element={<WarningPage />} />
           <Route path="/gender" element={<GenderSelectionPage />} />
           <Route path="/take-photo" element={<TakePhotoPage />} />
+          <Route path="/loading" element={<LoadingPage />} />
           <Route path="/result" element={<ResultPage />} />
         </Routes>
         <WarningDialog open={warningDialogOpen} onClose={handleDialogClose} />

@@ -94,6 +94,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onStartClick }) => {
       }}
     >
 
+      {/* Анимация Девушки и Дерева снизу */}
       <motion.img
         src={girlAndTreeSvg}
         alt="Girl and Tree"
@@ -159,7 +160,6 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onStartClick }) => {
           zIndex: 2,
         }}
       />
-
 
       {/* Верхний текстовый блок */}
       <Box
@@ -302,7 +302,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onStartClick }) => {
             variant="contained"
             onClick={onStartClick}
             sx={{
-              backgroundColor: '#1a727c',
+              backgroundColor: 'rgba(26, 114, 124, 0.7)', // прозрачный фон
               border: '6px solid white',
               color: 'white',
               '&:hover': {
@@ -318,7 +318,6 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onStartClick }) => {
               maxWidth: '750px',
               zIndex: 1,
               animation: 'fadeInScale 1s ease-out',
-              opacity: 0.7,
               textTransform: 'capitalize',
             }}
           >

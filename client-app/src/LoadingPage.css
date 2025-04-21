@@ -1,0 +1,48 @@
+/* Стили для страницы загрузки */
+.loading-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('./images/frame-15.png'); /* Замените на актуальный путь к изображению */
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+  }
+  
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .spinner {
+    animation: spin 4s linear infinite;
+    width: 480px; /* Задайте нужный размер для логотипа */
+    height: 480px;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

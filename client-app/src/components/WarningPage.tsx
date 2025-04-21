@@ -2,6 +2,11 @@ import React from 'react';
 import { Box, Button, Typography, useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import cloudSvg from '../images/clouds.png';
+import birdSvg from '../images/bird.svg';
+import fieldSvg from '../images/fields.svg';
+import '../App.css'
+import bgImage from '../images/frame-20.png';
 
 const WarningPage: React.FC = () => {
   const navigate = useNavigate();
@@ -29,11 +34,64 @@ const WarningPage: React.FC = () => {
       height="100vh"
       px={3}
       py={4}
+      sx={{
+        backgroundImage: `url(${bgImage})`,
+      }}
     >
-      {/* Анимация текста сверху */}
+      {/* Анимация полей снизу */}
+      <motion.img
+        src={fieldSvg}
+        alt="Fields"
+        initial={{ opacity: 0, y: 700, x: -540 }} // появляется снизу
+        animate={{ opacity: 1, y: -420, x: -540 }}   // доходит до нужного положения
+        transition={{ duration: 1.8 }}
+        style={{
+          position: 'absolute',
+          top: '60%',                     // немного ниже центра экрана
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: isVertical ? '100%' : '35%',
+          zIndex: 0, // делает его фоном
+        }}
+      />
+
+      {/* Анимация облаков сверху */}
+      <motion.img
+        src={cloudSvg}
+        alt="Clouds and Sber Avatar"
+        initial={{ opacity: 0, y: -150, x: -540 }}
+        animate={{ opacity: 1, y: 0, x: -540 }}
+        transition={{ duration: 1.5 }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: isVertical ? '100%' : '40%',
+          zIndex: 0,
+        }}
+      />
+
+      {/* Анимация птицы справа */}
+      <motion.img
+        src={birdSvg}
+        alt="Bird Right"
+        initial={{ opacity: 0, x: 200, y: -100 }}
+        animate={{ opacity: 1, x: 50, y: -140 }}
+        transition={{ duration: 1.8 }}
+        style={{
+          position: 'absolute',
+          top: '35%',
+          right: isVertical ? '5%' : '10%',
+          width: isVertical ? '15%' : '10%',
+          zIndex: 0,
+        }}
+      />
+
+
       <motion.div
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 800, opacity: 1 }}
+        animate={{ y: 160, x: 130, opacity: 1 }}
         transition={{
           duration: 1,
           ease: 'easeOut',
@@ -42,32 +100,62 @@ const WarningPage: React.FC = () => {
       >
         <Box
           display="flex"
-          justifyContent="center"
-          alignItems="center"
-          textAlign={'center'}
+          justifyContent="flex-start" // 👈 выравнивание по левому краю
+          alignItems="flex-start"     // 👈 по верхнему краю
+          textAlign="left"            // 👈 в Box можно продублировать для надёжности
           flex={1}
           mt={-6}
           width="100%"
+          px={3}
         >
           <Typography
             variant="h4"
-            align="center"
+            align="left" // 👈 здесь главное
             sx={{
-              px: 3,
               fontSize: isVertical ? '2.5rem' : '1.75rem',
               wordBreak: 'break-word',
               maxWidth: '750px',
+              fontWeight: 500,
+              fontFamily: 'SB Sans Display, sans-serif',
             }}
           >
-            Вы должны согласиться с условиями перед продолжением.
+            СОГЛАСИЕ НА ОБРАБОТКУ ФОТОГРАФИИ
+            <br />
+            Нажимая кнопку «Согласен / Сделать фото», вы подтверждаете, что:
+            <br />
+            1) Соглашаетесь на съёмку 
+            <br />
+            и обработку изображения вашего лица (биометрических данных) 
+            <br />
+            в развлекательных целях;
+            <br />
+            2) Ваше фото будет использовано только для создания стилизованного изображения 
+            <br />
+            и показано на экране;
+            <br />
+            - Исходная фотография будет удалена сразу после обработки;
+            <br />
+            - Финальное изображение 
+            <br />
+            не хранится, если вы сами 
+            <br />
+            не выберете функцию «Скачать / Отправить»;
+            <br />
+            - Обработка информации будет осуществляться при помощи Kandinsky.
+            <br />
+            Если вы не согласны, вернитесь 
+            <br />
+            в меню.
+            Для продолжения нажмите
+            <br />
+            «Согласен / Сделать фото».
           </Typography>
         </Box>
       </motion.div>
 
-      {/* Кнопки снизу с плавной анимацией */}
       <motion.div
-        initial={{ y: 200, opacity: 0 }}
-        animate={{ y: -50, x: -15 ,opacity: 1 }}
+        initial={{ y: 200, x: 30, opacity: 0 }} // Начальная позиция снизу
+        animate={{ y: -50, opacity: 1 }} // Двигаемся вверх до 0 (появляемся)
         transition={{
           duration: 1.2,
           delay: 0.2,
@@ -85,13 +173,14 @@ const WarningPage: React.FC = () => {
           mb={4}
           sx={{
             marginLeft: isLargerThanFullHD ? '-50px' : '-110px', // Изменяем сдвиг влево для больших экранов
+            fontFamily: 'SB Sans Display, sans-serif',
           }}
         >
           <Button
             onClick={handleAgree}
             variant="contained"
             sx={{
-              backgroundColor: '#1a727c',
+              backgroundColor: 'rgba(26, 114, 124, 0.7)', // прозрачный фон
               border: '6px solid white',
               color: 'white',
               '&:hover': {
@@ -99,14 +188,15 @@ const WarningPage: React.FC = () => {
                 transform: 'scale(1.05)',
               },
               transition: 'transform 0.2s ease-in-out',
-              fontSize: isVertical ? '2rem' : '1.5rem',
+              fontSize: isVertical ? '3rem' : '2rem', // увеличиваем размер букв
+              letterSpacing: '0.10em', // расстояние между буквами
               padding: isVertical ? '2rem 4rem' : '1rem 2rem',
               borderRadius: isVertical ? '40px' : '12px',
               width: '100%',
               maxWidth: '750px',
-              opacity: 0.5,
               whiteSpace: 'nowrap',
               textAlign: 'center',
+              textTransform: 'none', // Убираем преобразование в верхний регистр
             }}
           >
             Принять и продолжить
@@ -122,12 +212,16 @@ const WarningPage: React.FC = () => {
               textTransform: 'none',
               boxShadow: 'none',
               width: '100%',
+              fontFamily: 'SB Sans Display, sans-serif',
+              fontWeight: 'bold',
+              letterSpacing: '0.10em', // расстояние между буквами
             }}
           >
-            Не принимаю
+            Вернуться в меню
           </Button>
         </Box>
       </motion.div>
+
     </Box>
   );
 };

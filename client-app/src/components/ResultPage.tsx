@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { 
-  Box, Button, Typography, Modal, CircularProgress, Alert,
+import { Box, Button, Typography, Modal, CircularProgress, Alert,
   Card, CardMedia, CardContent, IconButton } from '@mui/material';
 import { QRCodeSVG } from 'qrcode.react';
 import CloseIcon from '@mui/icons-material/Close';
@@ -101,15 +100,15 @@ const ResultPage: React.FC = () => {
     return img.data ? `data:image/png;base64,${img.data}` : img.url;
   };
 
-  // Рендер загрузки
-  if (connectionStatus === 'connecting') {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-        <CircularProgress />
-        <Typography sx={{ ml: 2 }}>Подключение к серверу...</Typography>
-      </Box>
-    );
-  }
+  // // Рендер загрузки
+  // if (connectionStatus === 'connecting') {
+  //   return (
+  //     <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+  //       <CircularProgress />
+  //       <Typography sx={{ ml: 2 }}>Подключение к серверу...</Typography>
+  //     </Box>
+  //   );
+  // }
 
   // Рендер при отсутствии изображений
   if (images.length === 0) {
