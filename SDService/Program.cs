@@ -44,7 +44,21 @@ builder.Services.AddScoped<IMongoDatabase>(sp =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder
+                .WithOrigins("http://localhost:3000")  // Замените на ваш фронтенд-адрес
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
+
+app.UseCors("AllowSpecificOrigin");
 
 // Выполняем сид при старте
 using (var scope = app.Services.CreateScope())

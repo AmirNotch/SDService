@@ -1,0 +1,34 @@
+.result-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.image-card {
+  transition: transform 0.3s ease;
+}
+
+.image-card:hover {
+  transform: scale(1.03);
+}
+
+.qr-modal-content {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  max-width: 90vw;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;  /* Убирает прокрутку страницы */
+}
