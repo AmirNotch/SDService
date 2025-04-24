@@ -34,9 +34,9 @@ const LoadingPage = () => {
 
     const loadingImages = [
         Component1SVG,
-        Component2SVG,
-        Component3SVG,
-        Component4SVG
+        Component1SVG,
+        Component1SVG,
+        Component1SVG
     ];
 
     // Получаем sessionId из location.state
@@ -54,7 +54,8 @@ const LoadingPage = () => {
     const connectWebSocket = useCallback(() => {
         if (wsRef.current?.readyState === WebSocket.OPEN) return;
 
-        const ws = new WebSocket(`ws://stabledeffusion.api:8080/api/public/ws?sessionId=${sessionId}`);
+        const baseUrl = process.env.REACT_APP_WS_URL || 'ws://localhost:5286/api/public/ws';
+        const ws = new WebSocket(`${baseUrl}?sessionId=${sessionId}`);
         wsRef.current = ws;
 
         ws.onmessage = (event) => {

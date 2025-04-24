@@ -75,7 +75,7 @@ const TakePhotoPage: React.FC = () => {
     const formData = new FormData();
     formData.append('file', imageBlob, 'photo.jpg');
 
-    const response = await fetch('http://stabledeffusion.api:8080/api/comfy/upload-image', {
+    const response = await fetch('http://localhost:5286/api/comfy/upload-image', {
       method: 'POST',
       body: formData,
     });
@@ -251,7 +251,10 @@ const TakePhotoPage: React.FC = () => {
           alignItems="center"
         >
           {!isCounting && (
-            <Typography variant="body1" mb={1} width={100}>
+            <Typography variant="body1" mb={1} width={100} sx={{ 
+              width: 'auto', // убираем фиксированную ширину
+              whiteSpace: 'nowrap', // запрещаем перенос текста
+            }}>
               Нажмите, чтобы сделать фото
             </Typography>
           )}

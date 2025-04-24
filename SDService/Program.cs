@@ -10,6 +10,9 @@ using SDService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// 👇 ЭТО ОЧЕНЬ ВАЖНО для контейнера
+builder.WebHost.UseUrls("http://0.0.0.0:8080");
+
 // Регистрируем HttpClientFactory
 builder.Services.AddHttpClient("ComfyUI", client =>
 {
