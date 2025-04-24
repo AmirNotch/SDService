@@ -9,8 +9,8 @@ services:
     volumes:
       - mongo_data:/data/db
         
-  stableDeffusion.api:
-    container_name: stableDeffusion.api
+  stabledeffusion.api:
+    container_name: stabledeffusion.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings:MongoDb=mongodb://stableDeffusiondb:27017
@@ -28,5 +28,5 @@ services:
       - ./client-app:/app  # Hot-reload для разработки
       - /app/node_modules
     environment:
-      - REACT_APP_API_URL=http://stableDeffusion.api:8080
-      - REACT_APP_WS_URL=ws://stableDeffusion.api:8080
+      - REACT_APP_API_URL=http://stabledeffusion.api:8080
+      - REACT_APP_WS_URL=ws://stabledeffusion.api:8080

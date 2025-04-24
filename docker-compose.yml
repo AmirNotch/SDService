@@ -5,7 +5,7 @@ services:
     image: mongo
 
 
-  stableDeffusion.api:
+  stabledeffusion.api:
     image: ${DOCKER_REGISTRY-}stabledeffusionapi
     build:
       context: .
@@ -19,7 +19,7 @@ services:
     environment:
       - NODE_ENV=development
     depends_on:
-      - stableDeffusion.api
+      - stabledeffusion.api
 
 volumes:
   mongo_data:

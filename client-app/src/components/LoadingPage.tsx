@@ -54,7 +54,7 @@ const LoadingPage = () => {
     const connectWebSocket = useCallback(() => {
         if (wsRef.current?.readyState === WebSocket.OPEN) return;
 
-        const ws = new WebSocket(`ws://stableDeffusion.api:8080/api/public/ws?sessionId=${sessionId}`);
+        const ws = new WebSocket(`ws://stabledeffusion.api:8080/api/public/ws?sessionId=${sessionId}`);
         wsRef.current = ws;
 
         ws.onmessage = (event) => {

@@ -75,7 +75,7 @@ const TakePhotoPage: React.FC = () => {
     const formData = new FormData();
     formData.append('file', imageBlob, 'photo.jpg');
 
-    const response = await fetch('http://localhost:5286/api/comfy/upload-image', {
+    const response = await fetch('http://stabledeffusion.api:8080/api/comfy/upload-image', {
       method: 'POST',
       body: formData,
     });
@@ -94,7 +94,7 @@ const TakePhotoPage: React.FC = () => {
 
   const processImage = async (imageName: string): Promise<ProcessResult> => {
     const response = await fetch(
-      `http://localhost:5286/api/comfy/process?userImageName=${encodeURIComponent(imageName)}&gender=${gender}`,
+      `http://stabledeffusion.api:8080/api/comfy/process?userImageName=${encodeURIComponent(imageName)}&gender=${gender}`,
       { method: 'POST' }
     );
 

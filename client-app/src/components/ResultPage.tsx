@@ -68,7 +68,7 @@ const ResultPage: React.FC = () => {
     if (wsRef.current?.readyState === WebSocket.OPEN) return;
 
     const sessionId = location.state?.sessionId || 'default-session';
-    const wsUrl = `ws://stableDeffusion.api:8080/api/public/ws?sessionId=${sessionId}`;
+    const wsUrl = `ws://stabledeffusion.api:8080/api/public/ws?sessionId=${sessionId}`;
 
     wsRef.current = new WebSocket(wsUrl);
 
@@ -114,7 +114,7 @@ const ResultPage: React.FC = () => {
   const handleBack = async () => {
     try {
       // Отправляем запрос на очистку очереди
-      const response = await fetch('http://stableDeffusion.api:8080/api/comfy/clear-queue', {
+      const response = await fetch('http://stabledeffusion.api:8080/api/comfy/clear-queue', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
