@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Регистрируем HttpClientFactory
 builder.Services.AddHttpClient("ComfyUI", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:8000");  // Указываем IP другого сервиса
+    client.BaseAddress = new Uri("http://host.docker.internal:8000");  // Указываем IP другого сервиса
     client.Timeout = TimeSpan.FromSeconds(30);  // Устанавливаем тайм-аут
 });
 

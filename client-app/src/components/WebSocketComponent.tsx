@@ -27,7 +27,7 @@ const WebSocketComponent: React.FC<ResultPageProps> = ({ initialData }) => {
       setLoading(false);
     }
 
-    const ws = new WebSocket('ws://localhost:5286/api/public/ws');
+    const ws = new WebSocket('ws://stableDeffusion.api:8080/api/public/ws');
 
     ws.onopen = () => {
       console.log('WebSocket connected');

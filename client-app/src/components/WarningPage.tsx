@@ -12,8 +12,8 @@ const WarningPage: React.FC = () => {
   const navigate = useNavigate();
   const isFullHD = useMediaQuery('(max-width: 1920px)'); // Для Full HD и меньше
   const isLargerThanFullHD = useMediaQuery('(min-width: 1921px)'); // Для экранов больше Full HD
+  const isVertical = window.innerHeight > window.innerWidth;
 
-  const isVertical = useMediaQuery('(max-width: 1080px) and (min-height: 1920px)');
 
   const handleAgree = () => {
     navigate('/gender');
@@ -35,7 +35,7 @@ const WarningPage: React.FC = () => {
       px={3}
       py={4}
       sx={{
-        backgroundImage: `url(${bgImage})`,
+        background: 'linear-gradient(180deg, #CAEBF9 0%, #368593 100%)',
       }}
     >
       {/* Анимация полей снизу */}
@@ -43,11 +43,11 @@ const WarningPage: React.FC = () => {
         src={fieldSvg}
         alt="Fields"
         initial={{ opacity: 0, y: 700, x: -540 }} // появляется снизу
-        animate={{ opacity: 1, y: -420, x: -540 }}   // доходит до нужного положения
+        animate={{ opacity: 1, y: -1100, x: -540 }}   // доходит до нужного положения
         transition={{ duration: 1.8 }}
         style={{
           position: 'absolute',
-          top: '60%',                     // немного ниже центра экрана
+          top: '100%',                     // немного ниже центра экрана
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: isVertical ? '100%' : '35%',

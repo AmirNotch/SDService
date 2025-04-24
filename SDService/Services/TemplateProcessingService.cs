@@ -44,7 +44,7 @@ public class TemplateProcessingService : ITemplateProcessingService
             if (jsonBody == null) continue;
 
             var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://127.0.0.1:8000/prompt", content);
+            var response = await _httpClient.PostAsync("http://host.docker.internal:8000/prompt", content);
             response.EnsureSuccessStatusCode();
 
             var responseBody = await response.Content.ReadAsStringAsync();
@@ -195,5 +195,9 @@ public class TemplateProcessingService : ITemplateProcessingService
     }}
   }}
 }}";
+    }
+    public async Task ClearRenderQueueAsync()
+    {
+      await _renderQueueRepository.ClearQueueAsync();
     }
 }

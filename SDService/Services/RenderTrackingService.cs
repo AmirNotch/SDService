@@ -78,8 +78,8 @@ public class RenderTrackingService : IRenderTrackingService
                                 var filename = filenameElement.GetString();
                                 _logger.LogInformation("🎉 Found filename from history: {filename}", filename);
 
-                                var imageUrl = $"http://localhost:8000/view?filename={filename}";
-
+                                var imageUrl = $"http://host.docker.internal:8000/view?filename={filename}";
+                                var filenameNew = Guid.NewGuid() + filename;
                                 try
                                 {
                                     var response = await client.GetAsync(imageUrl);
@@ -87,7 +87,7 @@ public class RenderTrackingService : IRenderTrackingService
                                     {
                                         var imageBytes = await response.Content.ReadAsByteArrayAsync();
 
-                                        var savePath = Path.Combine("DownloadedImages", filename);
+                                        var savePath = Path.Combine("DownloadedImages", filenameNew);
                                         Directory.CreateDirectory("DownloadedImages");
                                         await File.WriteAllBytesAsync(savePath, imageBytes);
 
@@ -97,7 +97,7 @@ public class RenderTrackingService : IRenderTrackingService
                                         using var memoryStream = new MemoryStream(imageBytes);
                                         var s3Uploader = new S3Uploader("AKIAURJWB76W77TSNULG", "CacFkdEG0lkMaMayJd705AHuJ9pB4LwfiELzzGDH", "eu-north-1");
 
-                                        var s3Url = await s3Uploader.UploadFileAsync(memoryStream, filename);
+                                        var s3Url = await s3Uploader.UploadFileAsync(memoryStream, filenameNew);
                                         _logger.LogInformation("🌐 Файл загружен на S3 и доступен по ссылке: {url}", s3Url);
                                         
                                         // 🔥 Отправка по WebSocket всем активным клиентам
@@ -111,7 +111,7 @@ public class RenderTrackingService : IRenderTrackingService
                                                     {
                                                         type = "image",
                                                         url = s3Url,
-                                                        filename = filename,
+                                                        filename = filenameNew,
                                                         data = Convert.ToBase64String(imageBytes)
                                                     };
 

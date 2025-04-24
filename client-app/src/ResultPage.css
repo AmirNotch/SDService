@@ -1,0 +1,15 @@
+.result-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: 
+      url('./images/frame-10.png'),
+      linear-gradient(180deg, 
+        rgba(132, 82, 156, 1) 0%, 
+        rgba(192, 128, 156, 1) 31.25%, 
+        rgba(205, 238, 252, 0.7) 100%);
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+  }

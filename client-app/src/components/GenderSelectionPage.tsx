@@ -8,12 +8,11 @@ import mirror2Svg from '../images/right mirror.svg';
 import peopleSvg from '../images/people.png';
 import '../App.css'
 import bgImage from '../images/frame-17.png';
-import '../App.css'
 
 
 const GenderSelectionPage: React.FC = () => {
   const navigate = useNavigate();
-  const isVertical = useMediaQuery('(max-width: 1080px) and (min-height: 1920px)');
+  const isVertical = window.innerHeight > window.innerWidth;
 
   const handleGenderSelect = (gender: string) => {
     navigate('/take-photo', {
@@ -35,7 +34,7 @@ const GenderSelectionPage: React.FC = () => {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundImage: `url(${bgImage})`,
+        background: 'linear-gradient(180deg, #368593 0%, #CAEBF9 100%)',
       }}
     >
       {/* Анимация людей снизу */}
@@ -77,7 +76,7 @@ const GenderSelectionPage: React.FC = () => {
         src={mirror1Svg}
         alt="Mirror Left"
         initial={{ opacity: 0, x: -200, y: -120 }}
-        animate={{ opacity: 1, x: 100, y: -520 }}
+        animate={{ opacity: 1, x: 130, y: -500 }}
         transition={{ duration: 1.8 }}
         style={{
           position: 'absolute',
@@ -94,7 +93,7 @@ const GenderSelectionPage: React.FC = () => {
         src={mirror2Svg}
         alt="Mirror Right"
         initial={{ opacity: 0, x: 200, y: 400 }}
-        animate={{ opacity: 1, x: -10, y: 100 }}
+        animate={{ opacity: 1, x: 30, y: 150 }}
         transition={{ duration: 1.8 }}
         style={{
           position: 'absolute',

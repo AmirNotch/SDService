@@ -5,5 +5,21 @@ services:
     image: mongo
 
 
+  stableDeffusion.api:
+    image: ${DOCKER_REGISTRY-}stabledeffusionapi
+    build:
+      context: .
+      dockerfile: SDService/Dockerfile
+      
+      
+  react-app:
+    build:
+      context: ./client-app
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - stableDeffusion.api
+
 volumes:
   mongo_data:

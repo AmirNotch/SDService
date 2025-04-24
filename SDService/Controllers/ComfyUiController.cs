@@ -9,7 +9,7 @@ namespace SDService.Controllers;
 public class ComfyUiController : ControllerBase
 {
     private readonly HttpClient _httpClient;
-    private const string ComfyUiUploadUrl = "http://localhost:8000/upload/image";
+    private const string ComfyUiUploadUrl = "http://host.docker.internal:8000/upload/image";
     private readonly ITemplateProcessingService _service;
 
     public ComfyUiController(IHttpClientFactory httpClientFactory, ITemplateProcessingService service)
@@ -21,6 +21,8 @@ public class ComfyUiController : ControllerBase
     [HttpPost("upload-image")]
     public async Task<IActionResult> UploadToComfyUI([FromForm] IFormFile file)
     {
+        
+        Console.WriteLine("http://host.docker.internal:8000/upload/image");
         if (file == null || file.Length == 0)
             return BadRequest("No file provided.");
 
@@ -55,5 +57,12 @@ public class ComfyUiController : ControllerBase
 
         await _service.ProcessTemplatesAsync(userImageName, gender);
         return Ok("Templates processed successfully.");
+    }
+    
+    [HttpPost("clear-queue")]
+    public async Task<IActionResult> ClearRenderQueue()
+    {
+        await _service.ClearRenderQueueAsync();
+        return Ok("Render queue cleared successfully.");
     }
 }

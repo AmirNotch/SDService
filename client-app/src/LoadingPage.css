@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('./images/frame-15.png'); /* Замените на актуальный путь к изображению */
+    background: url('./images/frame-15.png'), linear-gradient(180deg, rgba(54, 133, 147, 1) 0%, rgba(202, 235, 249, 0.7) 100%);
     background-size: cover;
     background-position: center;
     flex-direction: column;

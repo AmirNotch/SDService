@@ -9,7 +9,9 @@ public class MongoSeeder
 
     public MongoSeeder(IConfiguration configuration)
     {
-        var client = new MongoClient(configuration.GetConnectionString("MongoDb"));
+        var connectionString = configuration.GetConnectionString("MongoDb") 
+                               ?? throw new ArgumentNullException("MongoDb connection string is not set");
+        var client = new MongoClient(connectionString);
         _database = client.GetDatabase("StableDeffusionDB"); // Заменить на нужное имя
     }
 

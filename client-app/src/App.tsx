@@ -71,9 +71,56 @@ const App: React.FC = () => {
     },
   });
 
+  const useViewportHeight = () => {
+    const [vh, setVh] = useState(window.innerHeight * 0.01);
+  
+    useEffect(() => {
+      const handleResize = () => {
+        setVh(window.innerHeight * 0.01);
+      };
+  
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+  
+    return vh;
+  };
+
   const AppContent: React.FC = () => {
+    const vh = useViewportHeight();
+  
+  useEffect(() => {
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }, [vh]);
     const [warningDialogOpen, setWarningDialogOpen] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+      // Функция для перехода в полноэкранный режим
+      const enterFullscreen = () => {
+        const elem = document.documentElement;
+        
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen().catch(err => {
+            console.error(`Ошибка при переходе в полноэкранный режим: ${err.message}`);
+          });
+        }
+      };
+  
+      // Блокировка выхода по ESC
+      const blockEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape' || e.key === 'F11') {
+          e.preventDefault();
+        }
+      };
+  
+      enterFullscreen();
+      document.addEventListener('keydown', blockEscape);
+  
+      return () => {
+        document.removeEventListener('keydown', blockEscape);
+      };
+    }, []);
 
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {

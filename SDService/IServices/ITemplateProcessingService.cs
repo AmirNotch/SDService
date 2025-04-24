@@ -3,4 +3,5 @@
 public interface ITemplateProcessingService
 {
     Task ProcessTemplatesAsync(string userImageName, string gender);
+    Task ClearRenderQueueAsync();
 }

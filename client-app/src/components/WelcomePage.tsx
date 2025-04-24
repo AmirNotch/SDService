@@ -14,7 +14,7 @@ interface WelcomePageProps {
 
 const WelcomePage: React.FC<WelcomePageProps> = ({ onStartClick }) => {
   const [connected, setConnected] = useState(false);
-  const isVertical = useMediaQuery('(max-width: 1080px) and (min-height: 1920px)');
+  const isVertical = window.innerHeight > window.innerWidth;
 
   useEffect(() => {
     const connect = async () => {
@@ -80,14 +80,17 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onStartClick }) => {
   return (
     <Box
       sx={{
+        height: 'calc(var(--vh, 1vh) * 100)',
+        width: '100vw',
+        position: 'fixed',
+        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh',
         px: isVertical ? '6rem' : '2rem',
         py: isVertical ? '4rem' : '2rem',
         boxSizing: 'border-box',
         justifyContent: 'space-between',
-        backgroundImage: `url(${bgImage})`,
+        background: 'linear-gradient(180deg, #CAEBF9 0%, #368593 100%)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -99,15 +102,16 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onStartClick }) => {
         src={girlAndTreeSvg}
         alt="Girl and Tree"
         initial={{ opacity: 0, y: 700, x: -540 }} // появляется снизу
-        animate={{ opacity: 1, y: -1020, x: -540 }}   // доходит до нужного положения
+        animate={{ opacity: 1, y: -2100, x: -540 }}   // доходит до нужного положения
         transition={{ duration: 1.8 }}
         style={{
           position: 'absolute',
-          top: '60%',                     // немного ниже центра экрана
+          top: isVertical ? '120%' : 'auto',
+          bottom: isVertical ? 'auto' : '-20%',
           left: '50%',
-          transform: 'translate(-50%, -50%)',
+          transform: 'translateX(-50%)',
           width: isVertical ? '100%' : '35%',
-          zIndex: 0, // делает его фоном
+          zIndex: 0,
         }}
       />
 
@@ -236,7 +240,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onStartClick }) => {
         >
           <motion.h2
             initial={{ opacity: 0, y: -2000 }}
-            animate={{ opacity: 1, y: -770, x: 65 }}
+            animate={{ opacity: 1, y: -700, x: 65 }}
             transition={{ duration: 1.4 }}
             style={{
               fontSize: isVertical ? '3.7rem' : '4.5rem',

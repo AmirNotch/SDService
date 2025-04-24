@@ -225,7 +225,7 @@ const TakePhotoPage: React.FC = () => {
               fontFamily: 'SB Sans Display, sans-serif',
             }}
           >
-            <img src={ArrowIcon} alt="arrow" style={{ width: 60, marginRight: 8 }} />
+            <img src={ArrowIcon} alt="arrow" style={{ width: 80, marginRight: 8 }} />
             <Typography variant="body1" color="white">
               Посмотрите в камеру,
               <br />
@@ -251,7 +251,7 @@ const TakePhotoPage: React.FC = () => {
           alignItems="center"
         >
           {!isCounting && (
-            <Typography variant="body1" mb={1}>
+            <Typography variant="body1" mb={1} width={100}>
               Нажмите, чтобы сделать фото
             </Typography>
           )}

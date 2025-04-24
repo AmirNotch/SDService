@@ -28,4 +28,17 @@ public class RenderQueueRepository : IRenderQueueRepository
         }
     }
 
+    public async Task ClearQueueAsync()
+    {
+        try
+        {
+            var collection = _database.GetCollection<RenderQueueItem>("render_queue");
+            var result = await collection.DeleteManyAsync(FilterDefinition<RenderQueueItem>.Empty);
+            Console.WriteLine($"Удалено {result.DeletedCount} элементов из очереди.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка при очистке очереди: {ex.Message}");
+        }
+    }
 }
